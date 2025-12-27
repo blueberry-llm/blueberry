@@ -3,7 +3,7 @@ name = "blueberry"
 version = "0.1.0"
 description = "Blueberry: The minimal full-stack ChatGPT clone that can be trained end-to-end for ~$100 on 8xH100 GPUs"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "datasets>=4.0.0",
     "fastapi>=0.117.1",
@@ -43,11 +43,11 @@ python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 
-# target torch to cuda 12.8 or CPU
+# target torch to cuda 13.0 or CPU
 [tool.uv.sources]
 torch = [  
     { index = "pytorch-cpu", extra = "cpu" },  
-    { index = "pytorch-cu128", extra = "gpu" },  
+    { index = "pytorch-cu130", extra = "gpu" },  
 ]
 
 [[tool.uv.index]]  
@@ -56,8 +56,8 @@ url = "https://download.pytorch.org/whl/cpu"
 explicit = true  
   
 [[tool.uv.index]]  
-name = "pytorch-cu128"  
-url = "https://download.pytorch.org/whl/cu128"  
+name = "pytorch-cu130"  
+url = "https://download.pytorch.org/whl/cu130"  
 explicit = true
 
 [project.optional-dependencies]  

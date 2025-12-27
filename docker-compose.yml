@@ -4,11 +4,14 @@ services:
     image: blueberry:latest
     container_name: blueberry-speedrun
     volumes:
-      - ./blueberry:/app/blueberry:ro  # Read-only mount of the source code
+      - ./blueberry:/app/blueberry  # Read-write mount for Rust build artifacts
       - blueberry_cache:/root/.cache/blueberry  # Persist cache directory
       - blueberry_venv:/app/.venv  # Persist virtual environment
+      - blueberry_rust_target:/app/blueberry/rustbpe/target  # Persist Rust build artifacts
     environment:
       - CUDA_VISIBLE_DEVICES=0  # Adjust based on available GPUs
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     runtime: nvidia  # Required for GPU access
     ports:
       - "7860:7860"  # For web UI access
@@ -18,3 +21,4 @@ services:
 volumes:
   blueberry_cache:
   blueberry_venv:
+  blueberry_rust_target:
