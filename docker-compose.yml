@@ -1,0 +1,20 @@
+services:
+  blueberry:
+    build: .
+    image: blueberry:latest
+    container_name: blueberry-speedrun
+    volumes:
+      - ./blueberry:/app/blueberry:ro  # Read-only mount of the source code
+      - blueberry_cache:/root/.cache/blueberry  # Persist cache directory
+      - blueberry_venv:/app/.venv  # Persist virtual environment
+    environment:
+      - CUDA_VISIBLE_DEVICES=0  # Adjust based on available GPUs
+    runtime: nvidia  # Required for GPU access
+    ports:
+      - "7860:7860"  # For web UI access
+    stdin_open: true
+    tty: true
+
+volumes:
+  blueberry_cache:
+  blueberry_venv:
